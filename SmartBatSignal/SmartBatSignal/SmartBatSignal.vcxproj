@@ -68,9 +68,14 @@
     </RemotePostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="LedBatSignal.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="RestServer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AbstractBatSignal.h" />
+    <ClInclude Include="LedBatSignal.h" />
+    <ClInclude Include="RestServer.h" />
   </ItemGroup>
   <ItemDefinitionGroup />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

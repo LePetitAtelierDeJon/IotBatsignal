@@ -1,24 +1,41 @@
 #include <wiringPi.h>
+#include <iostream>
 
-// LED Pin - wiringPi pin 0 is BCM_GPIO 17.
-// we have to use BCM numbering when initializing with wiringPiSetupSys
-// when choosing a different pin number please use the BCM numbering, also
-// update the Property Pages - Build Events - Remote Post-Build Event command 
-// which uses gpio export for setup for wiringPiSetupSys
+#include "RestServer.h"
+#include "LedBatSignal.h"
+
 #define	LED	17
 
-int main(void)
-{
-	wiringPiSetupSys();
+/**
+ * Entry point for the Batsignal code.
+ */
+int main(void) {
+    std::cout << "Starting Batsignal...\n";
+    wiringPiSetupSys();
 
-	pinMode(LED, OUTPUT);
+    std::unique_ptr<RestServer>server;
+    utility::string_t port = U("80");
+    utility::string_t address = U("http://0.0.0.0:");
+    address.append(port);
 
-	while (true)
-	{
-		digitalWrite(LED, HIGH);  // On
-		delay(500); // ms
-		digitalWrite(LED, LOW);	  // Off
-		delay(500);
-	}
-	return 0;
+    web::uri_builder uri(address);
+    uri.append_path(U("batsignal/"));
+
+    auto addr = uri.to_uri().to_string();
+    server = std::unique_ptr<RestServer>(new RestServer(addr));
+
+    std::shared_ptr<AbstractBatSignal> batSignal = std::make_shared<LedBatSignal>();
+
+    /*server->addPutCallCallaback(std::bind(&BatSignalRestHandler::putBatSignal, batHandler, std::placeholders::_1));
+    server->addGetCallCallaback(std::bind(&BatSignalRestHandler::getBatSignal, batHandler, std::placeholders::_1));*/
+
+    pinMode(LED, OUTPUT);
+
+    while (true) {
+        digitalWrite(LED, HIGH);  // On
+        delay(500); // ms
+        digitalWrite(LED, LOW);	  // Off
+        delay(500);
+    }
+    return 0;
 }
