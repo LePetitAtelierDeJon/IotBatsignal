@@ -3,39 +3,45 @@
 
 #include "RestServer.h"
 #include "LedBatSignal.h"
+#include "BatSignalRestHandler.h"
 
 #define	LED	17
 
 /**
  * Entry point for the Batsignal code.
  */
-int main(void) {
+int main(void)
+{
     std::cout << "Starting Batsignal...\n";
     wiringPiSetupSys();
 
-    std::unique_ptr<RestServer>server;
+    // Compose url.
     utility::string_t port = U("80");
     utility::string_t address = U("http://0.0.0.0:");
     address.append(port);
-
     web::uri_builder uri(address);
     uri.append_path(U("batsignal/"));
-
     auto addr = uri.to_uri().to_string();
-    server = std::unique_ptr<RestServer>(new RestServer(addr));
 
+    // Create REST Server.
+    RestServer server(addr);
+
+    // Create LedBatSignal.
     std::shared_ptr<AbstractBatSignal> batSignal = std::make_shared<LedBatSignal>();
 
-    /*server->addPutCallCallaback(std::bind(&BatSignalRestHandler::putBatSignal, batHandler, std::placeholders::_1));
-    server->addGetCallCallaback(std::bind(&BatSignalRestHandler::getBatSignal, batHandler, std::placeholders::_1));*/
+    // Create rest handler.
+    BatSignalRestHandler batHandler = BatSignalRestHandler(batSignal);
 
-    pinMode(LED, OUTPUT);
+    // Register methods.
+    server.addPutCallCallaback(std::bind(&AbstractRestHandler::put, batHandler, std::placeholders::_1));
+    server.addGetCallCallaback(std::bind(&AbstractRestHandler::get, batHandler, std::placeholders::_1));
 
-    while (true) {
-        digitalWrite(LED, HIGH);  // On
-        delay(500); // ms
-        digitalWrite(LED, LOW);	  // Off
-        delay(500);
+    // Infinite loop.
+    while (true) //get char to quit.
+    {
     }
+
+    std::cout << "end\n";
+
     return 0;
 }

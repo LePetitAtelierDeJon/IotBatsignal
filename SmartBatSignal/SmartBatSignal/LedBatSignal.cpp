@@ -2,22 +2,22 @@
 
 #include "LedBatSignal.h"
 
-LedBatSignal::LedBatSignal() {
+LedBatSignal::LedBatSignal()
+{
     // Init wiringPi for accessing raspberry GPIOs.
     wiringPiSetupSys();
 }
 
-LedBatSignal::~LedBatSignal()
+void LedBatSignal::turnTheLight(bool state)
 {
-}
-
-void LedBatSignal::turnTheLight(bool state) {
     digitalWrite(LED, state);
     batSignalState_ = state;
 }
 
-void LedBatSignal::triggerSignal() {
-    for (int i = 0; i < BLINK_COUNT; ++i) {
+void LedBatSignal::triggerSignal()
+{
+    for (int i = 0; i < BLINK_COUNT; ++i)
+    {
         digitalWrite(LED, HIGH);
         delay(BLINK_DURATION);
         digitalWrite(LED, LOW);
@@ -25,6 +25,7 @@ void LedBatSignal::triggerSignal() {
     }
 }
 
-bool LedBatSignal::lightStatus() const {
+bool LedBatSignal::lightStatus() const
+{
     return batSignalState_;
 }

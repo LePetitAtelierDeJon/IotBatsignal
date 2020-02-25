@@ -68,12 +68,15 @@
     </RemotePostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BatSignalRestHandler.cpp" />
     <ClCompile Include="LedBatSignal.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="RestServer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractBatSignal.h" />
+    <ClInclude Include="AbstractRestHandler.h" />
+    <ClInclude Include="BatSignalRestHandler.h" />
     <ClInclude Include="LedBatSignal.h" />
     <ClInclude Include="RestServer.h" />
   </ItemGroup>

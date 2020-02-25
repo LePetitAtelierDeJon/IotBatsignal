@@ -9,7 +9,6 @@ class LedBatSignal :
 {
 public:
     LedBatSignal();
-    ~LedBatSignal();
 
     // Inherited via AbstractBatSignal
     virtual void turnTheLight(bool state) override;

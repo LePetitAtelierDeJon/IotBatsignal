@@ -22,14 +22,16 @@ public:
     /**
      * Open the listener.
      */
-    inline pplx::task<void> open() {
+    inline pplx::task<void> open()
+    {
         return listener_.open();
     }
 
     /**
      * Close the listener.
      */
-    inline pplx::task<void> close() {
+    inline pplx::task<void> close()
+    {
         return listener_.close();
     }
 
