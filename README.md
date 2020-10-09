@@ -3,9 +3,9 @@ This project contains code for a IOT batsignal powered by a RaspberryPi.
 
 ## Installation
 ### dependencies to install
-cpprestsdk
-wiringpi
-sudo apt-get install libcurl-openssl-dev
+* [cpprestsdk](https://github.com/microsoft/cpprestsdk) : ```sudo apt-get install libcpprest-dev```
+* [wiringpi](http://wiringpi.com/download-and-install/) : ```sudo apt-get install wiringpi```
+* others : ```sudo apt-get install libcurl-openssl-dev```
 
 
 ### Build on raspbian 
