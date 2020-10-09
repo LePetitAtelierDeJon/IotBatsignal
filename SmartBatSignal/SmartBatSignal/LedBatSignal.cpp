@@ -6,6 +6,7 @@ LedBatSignal::LedBatSignal()
 {
     // Init wiringPi for accessing raspberry GPIOs.
     wiringPiSetupSys();
+    pinMode(LED, OUTPUT);
 }
 
 void LedBatSignal::turnTheLight(bool state)

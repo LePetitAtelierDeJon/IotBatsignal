@@ -13,7 +13,6 @@
 int main(void)
 {
     std::cout << "Starting Batsignal...\n";
-    wiringPiSetupSys();
 
     // Compose url.
     utility::string_t port = U("80");
