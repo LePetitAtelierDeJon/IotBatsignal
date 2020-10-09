@@ -1,5 +1,8 @@
 # IOT Batsignal
-This project contains code for a IOT batsignal powered by a RaspberryPi.
+This project is the code for an IOT Batsignal powered by a RaspberryPi.
+It provides a tiny REST API to control the light of the Batsignal.
+
+The models for 3D print the signal can be found [here]().
 
 ## Installation
 ### dependencies to install
@@ -7,17 +10,19 @@ This project contains code for a IOT batsignal powered by a RaspberryPi.
 * [wiringpi](http://wiringpi.com/download-and-install/) : ```sudo apt-get install wiringpi```
 * others : ```sudo apt-get install libcurl-openssl-dev```
 
+### Build with Visual Studio
+The project provides an sln file to crossbuild and deploy the code directly on a raspberry pi from a windows computer.
+more informations : https://docs.microsoft.com/en-us/cpp/linux/?view=vs-2019
 
 ### Build on raspbian 
 ```g++ -std=c++11 RestServer.cpp main.cpp -o main -lwiringPi -lcurl -lboost_system -lcrypto -lssl -lcpprest -lm -lpthread```
 
-### Setting up the gpio
+### Export the gpio to be used in a user software
 ```gpio export 17 output```
 
-### Launch the program at launch
-```sudo nano /etc/rc.local```
-
-then add before the line ```exit 0```
+### Setup the software to be launched at startup
+Edit the rc.local file : ```sudo nano /etc/rc.local```
+Then add before the line ```exit 0``` the following lines :
 ```
 gpio export 17 output
 /home/pi/SmartBatSignal.out
