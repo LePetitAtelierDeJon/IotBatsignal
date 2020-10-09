@@ -27,6 +27,10 @@ Then add before the line ```exit 0``` the following lines :
 gpio export 17 output
 /home/pi/SmartBatSignal.out
 ```
+### Set static IP address :
+Edit dhcpcd.conf file : ```sudo nano /etc/dhcpcd.conf```
+under the line ```#interface eth0``` add the line :
+```static ip_address=<IP_ADDRESS>/24```
 
 ## How to use the API
 ### Turn on/off the light
