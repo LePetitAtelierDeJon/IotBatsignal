@@ -42,12 +42,12 @@ The state variable in the body defines if the light is on(true) or off(false).
 
 ### Make the signal blink 3 times
 * Request Type : **PUT**
-* Path :  ```http://<RPI_IP>:80//batsignal/batSignal/```
+* Path :  ```http://<RPI_IP>:80/batsignal/batSignal/```
 * Body : none
 
 ### Get the light status
 * Request Type : **GET**
-* Path : ```http://<RPI_IP>:80//batsignal/batSignal/```
+* Path : ```http://<RPI_IP>:80/batsignal/light/```
 * Response : ``` {"state": <Boolean>} ```
 
 The state variable in the response defines if the light is on(true) or off(false).
